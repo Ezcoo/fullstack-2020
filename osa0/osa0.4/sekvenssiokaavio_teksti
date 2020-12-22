@@ -1,0 +1,16 @@
+note over selain: käyttäjä lähettää uuden muistiinpanon palvelimelle
+selain->palvelin: HTTP POST 302 https://studies.cs.helsinki.fi/exampleapp/new_note
+palvelin-->selain: HTML-koodi
+selain->palvelin: HTTP GET 200 https://studies.cs.helsinki.fi/exampleapp/notes
+palvelin-->selain: HTML-koodi
+selain->palvelin: HTTP GET 200 https://studies.cs.helsinki.fi/exampleapp/main.css
+palvelin-->selain: CSS-tiedosto
+selain->palvelin: HTTP GET 200 https://studies.cs.helsinki.fi/exampleapp/main.js
+palvelin-->selain: Javascript-tiedosto
+note over selain: selain alkaa suorittaa Javascript-koodia, joka pyytää JSON-tiedoston palvelimelta
+selain->palvelin: HTTP GET 200 https://studies.cs.helsinki.fi/exampleapp/data.json
+palvelin-->selain: JSON-tiedosto
+note over selain: selain suorittaa event handlerin, joka renderöi muistiinpanot näytölle
+selain->palvelin: HTTP GET 200 https://studies.cs.helsinki.fi/favicon.ico
+palvelin-->selain: HTML-tiedosto (?)
+
