@@ -1,0 +1,12 @@
+title: SPA
+
+selain->palvelin: HTTP GET 200 https://studies.cs.helsinki.fi/exampleapp/spa
+palvelin-->selain: HTML-tiedosto
+selain->palvelin: HTTP GET 200 https://studies.cs.helsinki.fi/exampleapp/main.css
+palvelin-->selain: CSS-tiedosto
+selain->palvelin: HTTP GET 200 https://studies.cs.helsinki.fi/exampleapp/spa.js
+palvelin-->selain: Javascript-tiedosto (spa.js)
+selain->palvelin: HTTP GET 200 https://studies.cs.helsinki.fi/exampleapp/data.json
+palvelin-->selain: JSON-tiedosto
+selain->palvelin: HTTP GET 200 https://studies.cs.helsinki.fi/favicon.ico
+palvelin->selain: Favicon.ico-tiedosto
