@@ -6,11 +6,13 @@ const Result = (props) => {
   )
 }
 
-const Button = (props) => (
-    <button onClick={props.handleClick}>
-      {props.text}
-    </button>
-)
+const Button = (props) => {
+  return (
+  <button onClick={props.handleClick}>
+    {props.text}
+  </button>
+  )
+}
 
 const App = () => {
 
@@ -19,9 +21,17 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  const addGood = () => setGood(good + 1)
-  const addNeutral = () => setNeutral(neutral + 1)
-  const addBad = () => setBad(bad + 1)
+  const addGood = () => {
+    setGood(good + 1)
+  }
+
+  const addNeutral = () => {
+    setNeutral(neutral + 1)
+  }
+
+  const addBad = () => {
+    setBad(bad + 1)
+  }
 
   return (
     <div>
@@ -36,6 +46,9 @@ const App = () => {
       <Result title={'good'} result={good} />
       <Result title={'neutral'} result={neutral} />
       <Result title={'bad'} result={bad} />
+      <Result title={'all'} result={good + bad + neutral} />
+      <Result title={'average'} result={(good - bad) / (good + neutral + bad) || 0} />
+      <Result title={'positive'} result={good / (good + bad + neutral) || 0} />
     </div> 
   )
 }
