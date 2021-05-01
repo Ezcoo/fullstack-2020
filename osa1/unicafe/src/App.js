@@ -14,26 +14,41 @@ const Button = (props) => {
   )
 }
 
-const Statistics = (props) => {
-  if (props.good === 0 && props.neutral === 0 && props.bad === 0) {
+const StatisticsLine = (props) => {
+  if (props.good === 0 && props.neutral === 0 && props.bad === 0 && !props.feedbackGiven) {
     return (
-      <div>
-        <p>No feedback given</p>
-      </div>
+      <div>No feedback given</div>
     )
   }
 
-  let all = props.good + props.neutral + props.bad
-  let average = (props.good - props.bad) / (props.good + props.neutral + props.bad) || 0
-  let positive = props.good / (props.good + props.neutral + props.bad) || 0
+  if (props.good === 0 && props.neutral === 0 && props.bad === 0 && props.feedbackGiven) {
+    return (
+      <div></div>
+    )
+  }
+
+  if (props.selection === "all") {
+    return (
+      <div>all {props.good + props.neutral + props.bad}</div>
+    )
+  }
+
+  if (props.selection === "average") {
+    return (
+      <div>average {(props.good - props.bad) / (props.good + props.neutral + props.bad) || 0}</div>
+    )
+  }
+
+  if (props.selection === "positive") {
+    return (
+      <div>positive {props.good / (props.good + props.neutral + props.bad) || 0}</div>
+    )
+  }
 
   return (
-    <div>
-      <p>all {all}</p>
-      <p>average {average}</p>
-      <p>positive {positive}</p>
-    </div>
+    <div>No feedback given</div>
   )
+
 }
 
 const App = () => {
@@ -68,7 +83,9 @@ const App = () => {
       <Result title={'good'} result={good} />
       <Result title={'neutral'} result={neutral} />
       <Result title={'bad'} result={bad} />
-      <Statistics good={good} neutral={neutral} bad={bad} />
+      <StatisticsLine selection={'all'} good={good} neutral={neutral} bad={bad} feedbackGiven={false}/>
+      <StatisticsLine selection={'average'} good={good} neutral={neutral} bad={bad} feedbackGiven={true}/>
+      <StatisticsLine selection={'positive'} good={good} neutral={neutral} bad={bad} feedbackGiven={true}/>
     </div> 
   )
 }
