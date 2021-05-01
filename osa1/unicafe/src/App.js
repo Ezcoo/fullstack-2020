@@ -15,6 +15,14 @@ const Button = (props) => {
 }
 
 const Statistics = (props) => {
+  if (props.good === 0 && props.neutral === 0 && props.bad === 0) {
+    return (
+      <div>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
+
   let all = props.good + props.neutral + props.bad
   let average = (props.good - props.bad) / (props.good + props.neutral + props.bad) || 0
   let positive = props.good / (props.good + props.neutral + props.bad) || 0
