@@ -14,6 +14,20 @@ const Button = (props) => {
   )
 }
 
+const Statistics = (props) => {
+  let all = props.good + props.neutral + props.bad
+  let average = (props.good - props.bad) / (props.good + props.neutral + props.bad) || 0
+  let positive = props.good / (props.good + props.neutral + props.bad) || 0
+
+  return (
+    <div>
+      <p>all {all}</p>
+      <p>average {average}</p>
+      <p>positive {positive}</p>
+    </div>
+  )
+}
+
 const App = () => {
 
   // tallenna napit omaan tilaansa
@@ -46,9 +60,7 @@ const App = () => {
       <Result title={'good'} result={good} />
       <Result title={'neutral'} result={neutral} />
       <Result title={'bad'} result={bad} />
-      <Result title={'all'} result={good + bad + neutral} />
-      <Result title={'average'} result={(good - bad) / (good + neutral + bad) || 0} />
-      <Result title={'positive'} result={good / (good + bad + neutral) || 0} />
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div> 
   )
 }
