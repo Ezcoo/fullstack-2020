@@ -6,6 +6,12 @@ const Result = (props) => {
   )
 }
 
+const Button = (props) => (
+    <button onClick={props.handleClick}>
+      {props.text}
+    </button>
+)
+
 const App = () => {
 
   // tallenna napit omaan tilaansa
@@ -21,15 +27,9 @@ const App = () => {
     <div>
       <h1>give feedback</h1>
       <br/>
-      <button onClick={addGood}>
-        good
-      </button>
-      <button onClick={addNeutral}>
-        neutral
-      </button>
-      <button onClick={addBad}>
-        bad
-      </button>
+      <Button handleClick={addGood} text="good" />
+      <Button handleClick={addNeutral} text="neutral" />
+      <Button handleClick={addBad} text="bad" />
       <br/>
       <h1>statistics</h1>
       <br/>
