@@ -8,12 +8,20 @@ const ButtonNext = (props) => {
   )
 }
 
-
 const ButtonVote = (props) => {
   return (
     <button onClick={props.handleClick} >
       {'vote'}
     </button>
+  )
+}
+
+const Anecdote = (props) => {
+  return (
+    <div>
+      <p>{props.text}</p>
+      <p>has {props.votes} votes</p>
+    </div>
   )
 }
 
@@ -30,7 +38,7 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [voteArray, setVoteArray] = useState(new Array(anecdotes.length).fill(0))
-  console.log(voteArray)
+  const [mostVotesIndex, setMostVotesIndex] = useState(0)
 
   const rngAnecdote = () => {
     let min = Math.ceil(0);
@@ -46,14 +54,26 @@ const App = () => {
     
     voteArrayNew[selected] += 1
     setVoteArray(voteArrayNew)
+
+    let mostVotesIndexTemp = 0
+
+    for (let i = 0; i < voteArrayNew.length; i++) {
+      if (voteArrayNew[i] > voteArrayNew[mostVotesIndexTemp]) {
+        mostVotesIndexTemp = i
+      }
+    }
+
+    setMostVotesIndex(mostVotesIndexTemp)
   }
 
   return (
     <div>
-      {anecdotes[selected]}
-      <p>has {voteArray[selected]} votes</p>
+      <h2>Anecdote of the day</h2>
+      <Anecdote text={anecdotes[selected]} votes={voteArray[selected]} />
       <ButtonVote handleClick={voteArraySet} voteIndex={selected} />
       <ButtonNext handleClick={rngAnecdote} />
+      <h2>Anecdote with the most votes</h2>
+      <Anecdote text={anecdotes[mostVotesIndex]} votes={voteArray[mostVotesIndex]} />
     </div>
   )
 }
