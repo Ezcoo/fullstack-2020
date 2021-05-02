@@ -8,6 +8,15 @@ const ButtonNext = (props) => {
   )
 }
 
+
+const ButtonVote = (props) => {
+  return (
+    <button onClick={props.handleClick} >
+      {'vote'}
+    </button>
+  )
+}
+
 const App = () => {
 
   const anecdotes = [
@@ -20,6 +29,8 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [voteArray, setVoteArray] = useState(new Array(anecdotes.length).fill(0))
+  console.log(voteArray)
 
   const rngAnecdote = () => {
     let min = Math.ceil(0);
@@ -30,10 +41,18 @@ const App = () => {
     setSelected(result)
   }
 
+  const voteArraySet = () => {
+    let voteArrayNew = [...voteArray];
+    
+    voteArrayNew[selected] += 1
+    setVoteArray(voteArrayNew)
+  }
+
   return (
     <div>
       {anecdotes[selected]}
-      <br/>
+      <p>has {voteArray[selected]} votes</p>
+      <ButtonVote handleClick={voteArraySet} voteIndex={selected} />
       <ButtonNext handleClick={rngAnecdote} />
     </div>
   )
