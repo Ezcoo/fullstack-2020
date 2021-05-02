@@ -8,14 +8,6 @@ const ButtonNext = (props) => {
   )
 }
 
-const ButtonVote = (props) => {
-  return (
-    <button onClick={props.handleClick} >
-      {'vote'}
-    </button>
-  )
-}
-
 const App = () => {
 
   const anecdotes = [
@@ -42,7 +34,6 @@ const App = () => {
     <div>
       {anecdotes[selected]}
       <br/>
-      <ButtonVote handleClick={} />
       <ButtonNext handleClick={rngAnecdote} />
     </div>
   )
