@@ -1,11 +1,5 @@
 import React, { useState } from 'react'
 
-const Result = (props) => {
-  return (
-    <div>{props.title} {props.result}</div>
-  )
-}
-
 const Button = (props) => {
   return (
   <button onClick={props.handleClick}>
@@ -14,40 +8,72 @@ const Button = (props) => {
   )
 }
 
-const StatisticsLine = (props) => {
-  if (props.good === 0 && props.neutral === 0 && props.bad === 0 && !props.feedbackGiven) {
-    return (
-      <div>No feedback given</div>
-    )
-  }
-
-  if (props.good === 0 && props.neutral === 0 && props.bad === 0 && props.feedbackGiven) {
-    return (
-      <div></div>
-    )
-  }
-
-  if (props.selection === "all") {
-    return (
-      <div>all {props.good + props.neutral + props.bad}</div>
-    )
-  }
-
-  if (props.selection === "average") {
-    return (
-      <div>average {(props.good - props.bad) / (props.good + props.neutral + props.bad) || 0}</div>
-    )
-  }
-
-  if (props.selection === "positive") {
-    return (
-      <div>positive {props.good / (props.good + props.neutral + props.bad) || 0}</div>
-    )
-  }
-
+const FeedbackCounter = (props) => {
   return (
-    <div>No feedback given</div>
+    <tr>
+      <td>{props.selection}</td>
+      <td>{props.value}</td>
+    </tr>
   )
+}
+
+const StatisticsLine = (props) => {
+  switch(props.selection) {
+
+    case 'all':
+      return (
+        <tr>
+          <td>all</td>
+          <td>{props.props.good + props.props.neutral + props.props.bad}</td>
+        </tr>
+       )
+
+    case 'average':
+      return (
+        <tr>
+          <td>average</td>
+          <td>{(props.props.good - props.props.bad) / (props.props.good + props.props.neutral + props.props.bad) || 0}</td>
+        </tr>
+      )
+
+    case 'positives':
+      return (
+        <tr>
+          <td>positive</td>
+          <td>{props.props.good / (props.props.good + props.props.neutral + props.props.bad) || 0}</td>
+        </tr>
+      )
+
+    default:
+      return (
+        <td></td>
+      )
+  }
+
+}
+
+const Statistics = (props) => {
+  if (props.good === 0 && props.neutral === 0 && props.bad === 0) {
+    return (
+      <tbody>
+        <tr>
+          <td>No feedback given</td>
+        </tr>
+      </tbody>
+    )
+
+  } else {
+    return (
+      <tbody>
+          <FeedbackCounter selection={'good'} value={props.good} />
+          <FeedbackCounter selection={'neutral'} value={props.neutral} />
+          <FeedbackCounter selection={'bad'} value={props.bad} />
+          <StatisticsLine selection={'all'} props={props} />
+          <StatisticsLine selection={'average'} props={props} />
+          <StatisticsLine selection={'positives'} props={props} />
+      </tbody>
+    )
+  }
 
 }
 
@@ -80,12 +106,9 @@ const App = () => {
       <br/>
       <h1>statistics</h1>
       <br/>
-      <Result title={'good'} result={good} />
-      <Result title={'neutral'} result={neutral} />
-      <Result title={'bad'} result={bad} />
-      <StatisticsLine selection={'all'} good={good} neutral={neutral} bad={bad} feedbackGiven={false}/>
-      <StatisticsLine selection={'average'} good={good} neutral={neutral} bad={bad} feedbackGiven={true}/>
-      <StatisticsLine selection={'positive'} good={good} neutral={neutral} bad={bad} feedbackGiven={true}/>
+      <table>
+        <Statistics good={good} neutral={neutral} bad={bad} />
+      </table>
     </div> 
   )
 }
