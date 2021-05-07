@@ -35,6 +35,7 @@ const App = () => {
       <div>
         <Header header={props.course} />
         <Content content={props.course} />
+        <Total course={props.course} />
       </div>
     )
   }
@@ -63,6 +64,23 @@ const App = () => {
     return (
       <div>
         <p>{props.part.name} {props.part.exercises}</p>
+      </div>
+    )
+  }
+
+  const Total = (props) => {
+    console.log(props)
+
+    let exercisesSum = 0
+
+    const total = props.course.parts.reduce((exercisesSum, currentValue) => {
+      exercisesSum = exercisesSum + currentValue.exercises
+      console.log('voi vittu', exercisesSum, currentValue.exercises)
+    })
+
+    return (
+      <div>
+        <h3>total of {total} exercises</h3>
       </div>
     )
   }
