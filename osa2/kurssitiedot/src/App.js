@@ -49,7 +49,6 @@ const App = () => {
   }
   
   const Content = (props) => {
-    console.log(props)
     return (
       <div>
         {props.content.parts.map(part => 
@@ -60,7 +59,6 @@ const App = () => {
   }
   
   const Part = (props) => {
-    console.log(props)
     return (
       <div>
         <p>{props.part.name} {props.part.exercises}</p>
@@ -69,14 +67,12 @@ const App = () => {
   }
 
   const Total = (props) => {
-    console.log(props)
 
-    let exercisesSum = 0
+    const parts = props.course.parts
+    console.log(parts)
 
-    const total = props.course.parts.reduce((exercisesSum, currentValue) => {
-      exercisesSum = exercisesSum + currentValue.exercises
-      console.log('voi vittu', exercisesSum, currentValue.exercises)
-    })
+    const total = parts
+                  .reduce((sum, part) => sum + part.exercises, 0)
 
     return (
       <div>
